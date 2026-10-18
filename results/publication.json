@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-18",
+  "repository": "https://github.com/khachatryann/opencore-lab",
+  "visibility": "public",
+  "initial_commit": "cdddaffd761a0f4b9ecded430fd305927bf1240e",
+  "initial_ci": {
+    "url": "https://github.com/khachatryann/opencore-lab/actions/runs/39137406363",
+    "status": "completed",
+    "conclusion": "success",
+    "runner": "ubuntu-24.04",
+    "verilator": "5.020 (Debian 5.020-1)",
+    "python": "3.12.15",
+    "node": "22.23.3",
+    "compiler": "GCC 13.3.0",
+    "unit_checks": 12155,
+    "processor_runs": 75,
+    "differential_retirements": 2234,
+    "upstream_add_vectors": 15,
+    "benchmark_runs": 18,
+    "committed_measurements_reproduced": true
+  },
+  "demo": {
+    "url": "https://khachatryann.github.io/opencore-lab/",
+    "deployment_run": "https://github.com/khachatryann/opencore-lab/actions/runs/39137460506",
+    "status": "completed",
+    "conclusion": "success",
+    "deployed_commit": "cdddaffd761a0f4b9ecded430fd305927bf1240e"
+  }
+}

@@ -30,7 +30,7 @@
   },
   "limitations": [
     "same host and installed toolchain; not an isolated OS/container",
-    "remote GitHub Actions has not run"
+    "At the time of the initial local rebuild, remote CI had not run; later successful GitHub CI evidence is in results/publication.json"
   ],
   "final_followup": "CSV output changed to LF line endings; benchmark and demo rebuilt in both directories and all 11 artifacts reconfirmed byte-identical."
 }

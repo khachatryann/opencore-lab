@@ -33,4 +33,4 @@ Arguments are image, JSONL output, fixed minimum latency, optional jitter, seed,
 
 ## Remaining gaps
 
-No exhaustive proof, external full-model differential, constrained random backward control flow, interrupt testing, mid-transaction reset test, multi-agent memory ordering test, synthesis report or timing closure. The harness’s 64 KiB RAM and demonstrated programs bound observed addresses; hardware wraparound is still implemented as 32-bit arithmetic. CI is supplied but a remote GitHub Actions execution is not claimed until the repository is published and run there.
+No exhaustive proof, external full-model differential, constrained random backward control flow, interrupt testing, mid-transaction reset test, multi-agent memory ordering test, synthesis report or timing closure. The harness’s 64 KiB RAM and demonstrated programs bound observed addresses; hardware wraparound is still implemented as 32-bit arithmetic. GitHub CI has passed on Ubuntu 24.04, including exact reproduction of the committed measurements; see `results/publication.json` for the run URL and tool versions.

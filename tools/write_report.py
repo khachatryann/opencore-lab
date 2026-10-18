@@ -65,7 +65,7 @@ Program selection, play/pause, reset, cycle stepping, instruction-retirement ste
 
 ## Limitations and next work
 
-The reference model was authored with the RTL in this AI-assisted project, so common interpretation errors remain possible. The upstream evidence currently covers only basic ADD vectors. There is no formal proof, complete external architectural suite, interrupt architecture, system-level memory-ordering experiment, mid-transaction reset validation, synthesized timing/area analysis or physical hardware deployment. GitHub CI is configured but remote runs require publication.
+The reference model was authored with the RTL in this AI-assisted project, so common interpretation errors remain possible. The upstream evidence currently covers only basic ADD vectors. There is no formal proof, complete external architectural suite, interrupt architecture, system-level memory-ordering experiment, mid-transaction reset validation, synthesized timing/area analysis or physical hardware deployment. GitHub CI has passed on Ubuntu 24.04, including exact reproduction of the committed measurement artifacts. The remote tool versions and run URL are recorded separately in `results/publication.json`.
 
 The most valuable next verification step is to expose RVFI or build a Spike/Sail comparison with precise treatment of the terminal environment. The most instructive performance extension is to separate instruction/data delay parameters and test whether the request-count equation still explains measured changes. Pipelining or caches should follow those stronger checks, not substitute for them.
 

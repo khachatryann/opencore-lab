@@ -13,7 +13,7 @@ The project intentionally has no Python, JavaScript or C++ package dependencies.
 | GNU Make | System make | Standard make rules |
 | Git | System git | Optional for local execution; needed for publication |
 
-Other version combinations are not claimed tested. CI uses Ubuntu 24.04's distribution packages and prints actual versions. The exact local simulator/Python versions are also recorded in the regression output. No lockfile is necessary because there are no package-level dependencies; system package updates can change tool versions.
+The first successful GitHub CI run also tested Ubuntu 24.04 with Verilator 5.020, GCC 13.3.0, Python 3.12.15 and Node 22.23.3. [Publication record](../results/publication.json). CI uses distribution packages and prints actual versions. The exact local simulator/Python versions are also recorded in the regression output. No lockfile is necessary because there are no package-level dependencies; system package updates can change tool versions.
 
 On macOS with Homebrew and Apple's command-line developer tools installed:
 
@@ -40,22 +40,24 @@ Then visit <http://127.0.0.1:8000>. Serve over HTTP: opening `index.html` via `f
 
 `make clean && make verify` rebuilds the simulator, runs every regression and benchmark, regenerates all demo traces and charts, builds the static site, and checks linkage. Generated simulation objects, images, JSONL traces and VCD files are ignored under `build/`; the benchmark summaries and six educational playback traces are tracked for immediate inspection and build-only hosting.
 
-During delivery, the source tree was copied to a fresh directory excluding `.git`, `build`, `dist` and Python caches; `make verify` was run there using the already-installed host toolchain. See `results/reproduction.json` for actual results. This is a clean source rebuild on the same host, not a fresh OS/container test. Linux CI is provided but was not executed remotely before publication.
+During delivery, the source tree was copied to a fresh directory excluding `.git`, `build`, `dist` and Python caches; `make verify` was run there using the already-installed host toolchain. See `results/reproduction.json` for actual results. This is a clean source rebuild on the same host, not a fresh OS/container test. After publication, GitHub CI passed on Ubuntu 24.04 and reproduced the measured artifacts; its separate evidence is in `results/publication.json`.
 
 ## GitHub
 
-The supplied folder is an initialized Git repository. No GitHub remote was created and no content has been published. To publish, create an empty repository in the desired account, then:
+The public repository is [khachatryann/opencore-lab](https://github.com/khachatryann/opencore-lab). Reviewers can open its [interactive demo](https://khachatryann.github.io/opencore-lab/) without installing a toolchain or signing in.
+
+To work from a new machine:
 
 ```sh
-git add .
-git commit -m "Add verified OpenCore Lab educational processor"
-git remote add origin https://github.com/YOUR-ACCOUNT/opencore-lab.git
-git push -u origin main
+git clone https://github.com/khachatryann/opencore-lab.git
+cd opencore-lab
+make verify
+make serve
 ```
 
-Use your real account/repository URL in the remote command. These are publication instructions, not a claim that a remote exists. `verification.yml` runs on pushes and pull requests and uploads `dist/`, reports and VCDs as workflow artifacts.
+`verification.yml` runs on pushes and pull requests and uploads `dist/`, reports and VCDs as workflow artifacts. The first Ubuntu verification run passed; see the [publication record](../results/publication.json) for its exact URL and versions.
 
-For GitHub Pages, enable Pages with **GitHub Actions** as its source, then manually run the **Deploy static demo** workflow. Its permissions are limited to contents read, Pages write and identity token issuance. The workflow deploys only `dist/`; the demo has no server, secrets, paid services or API keys. It can also be copied to any ordinary static host.
+GitHub Pages uses **GitHub Actions** as its source. To update the hosted demo after pushing changes, manually run **Deploy static demo** in the repository's Actions tab. Its permissions are limited to contents read, Pages write and identity token issuance. The workflow deploys only `dist/`; the demo has no server, secrets, paid services or API keys. It can also be copied to any ordinary static host.
 
 ## Troubleshooting
 

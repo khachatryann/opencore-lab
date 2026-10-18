@@ -1,5 +1,9 @@
 # OpenCore Lab: A RISC-V Processor You Can See
 
+[![Verify RTL and build demo](https://github.com/khachatryann/opencore-lab/actions/workflows/verification.yml/badge.svg)](https://github.com/khachatryann/opencore-lab/actions/workflows/verification.yml)
+
+**[Open the interactive demo](https://khachatryann.github.io/opencore-lab/)** · [Technical report](docs/technical-report.md) · [AI assistance statement](docs/ai-assistance.md)
+
 A small, synthesizable multi-cycle processor, an architectural checker, and a browser view of **real RTL simulation traces**. Explore how instructions move through fetch, decode, execute, memory and writeback, then measure what slower memory costs.
 
 ![OpenCore Lab playing a Fibonacci RTL trace](docs/screenshot.jpg)
@@ -74,6 +78,6 @@ Learn the processor in the [learning guide](docs/learning-guide.md). See [verifi
 
 ## Honest boundaries
 
-The reference model is independently structured but authored within this project. Only a narrow selection of upstream vectors is adapted; Spike/Sail, the full upstream architectural suites, formal proof, synthesis, physical timing and FPGA deployment were not run. No clock frequency, energy or certification claim is made. GitHub workflows are prepared; no remote CI execution or public repository is claimed before publication.
+The reference model is independently structured but authored within this project. Only a narrow selection of upstream vectors is adapted; Spike/Sail, the full upstream architectural suites, formal proof, synthesis, physical timing and FPGA deployment were not run. No clock frequency, energy or certification claim is made. [GitHub CI passed on Ubuntu 24.04](https://github.com/khachatryann/opencore-lab/actions/runs/39137406363), including RTL verification and exact reproduction of the committed measurement artifacts. See the [publication record](results/publication.json) for the tested remote versions and deployment evidence.
 
 Created with substantial AI assistance, described in [the assistance statement](docs/ai-assistance.md). No personal engineering history is attributed to the user. Original content is MIT licensed; borrowed tests retain their BSD notice. [Sources and licenses](THIRD_PARTY.md).
