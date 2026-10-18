@@ -1,0 +1,35 @@
+name: Verify RTL and build demo
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install RTL toolchain
+        run: sudo apt-get update && sudo apt-get install -y verilator build-essential
+      - name: Record versions
+        run: |
+          verilator --version
+          python3 --version
+          node --version
+          c++ --version
+      - name: Verify and build
+        run: make verify
+      - name: Check measured artifacts reproduce
+        run: git diff --exit-code -- results/benchmark.csv results/benchmark.json results/latency.svg demo/data
+      - uses: actions/upload-artifact@v4
+        with:
+          name: opencore-results-and-demo
+          path: |
+            dist/
+            results/
+            build/runs/*.vcd

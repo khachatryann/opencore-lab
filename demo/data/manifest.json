@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "source": "Verilator RTL trace playback",
+  "memory_window": [
+    1024,
+    1152
+  ],
+  "programs": [
+    {
+      "id": "arithmetic",
+      "file": "arithmetic.json",
+      "frames": 71,
+      "sha256": "12813248b1a4d889d875e280887825daf58f7b5ea7a993c6e6cbd8588081215e"
+    },
+    {
+      "id": "array_sum",
+      "file": "array_sum.json",
+      "frames": 193,
+      "sha256": "f9ef433e9f8b56a9cab81bb37ef4c3cc3c77be00dc04532bbf71d5c51504a4b6"
+    },
+    {
+      "id": "fibonacci",
+      "file": "fibonacci.json",
+      "frames": 468,
+      "sha256": "7dd5a292ec8af5c3e4696cf83ee7c673bc2a2625d8dc0e3e15259a5d00768688"
+    },
+    {
+      "id": "memory_copy",
+      "file": "memory_copy.json",
+      "frames": 563,
+      "sha256": "cb92154126761224ee31ad9b1e9a6fe70b12513a4a95883f567fa627c8f4991e"
+    },
+    {
+      "id": "search",
+      "file": "search.json",
+      "frames": 179,
+      "sha256": "7069878df7fa1957736272982f4435e1d820e08981e79302b3314be04ba52770"
+    },
+    {
+      "id": "sort",
+      "file": "sort.json",
+      "frames": 703,
+      "sha256": "45b8a3bf3accf3f27c8ceee9a6364c503e78aeec9ccc94b63a78108a4ce2b7a6"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "date": "2026-10-18",
+  "browser": "Codex in-app browser",
+  "desktop_viewport": [
+    1440,
+    1000
+  ],
+  "mobile_viewport": [
+    390,
+    844
+  ],
+  "checks": [
+    "all six program selections",
+    "cycle step advances one cycle",
+    "instruction step reaches next retirement",
+    "reset returns to cycle 1",
+    "play toggles to pause and advances cycles",
+    "speed selection changes playback rate",
+    "timeline End reaches terminal EBREAK and disables stepping",
+    "all 32 rendered final registers match trace for every program",
+    "all 32 rendered final memory words match reconstructed RTL memory for every program",
+    "mobile viewport has no document horizontal overflow; datapath intentionally scrolls",
+    "browser console has no captured errors or warnings"
+  ],
+  "programs": [
+    {
+      "program": "arithmetic",
+      "terminal_cycle": 71,
+      "registers_compared": 32,
+      "memory_words_compared": 32
+    },
+    {
+      "program": "array_sum",
+      "terminal_cycle": 193,
+      "registers_compared": 32,
+      "memory_words_compared": 32
+    },
+    {
+      "program": "sort",
+      "terminal_cycle": 703,
+      "registers_compared": 32,
+      "memory_words_compared": 32
+    },
+    {
+      "program": "memory_copy",
+      "terminal_cycle": 563,
+      "registers_compared": 32,
+      "memory_words_compared": 32
+    },
+    {
+      "program": "search",
+      "terminal_cycle": 179,
+      "registers_compared": 32,
+      "memory_words_compared": 32
+    },
+    {
+      "program": "fibonacci",
+      "terminal_cycle": 468,
+      "registers_compared": 32,
+      "memory_words_compared": 32
+    }
+  ],
+  "screenshots": [
+    "docs/screenshot.jpg",
+    "docs/screenshot-mobile.jpg"
+  ],
+  "limitations": [
+    "manual browser automation QA, not a committed automated browser regression suite",
+    "no screen reader audit or exhaustive browser compatibility check"
+  ]
+}

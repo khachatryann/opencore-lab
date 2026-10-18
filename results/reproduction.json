@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "date": "2026-10-18",
+  "method": "Fresh source copy excluding .git, build, dist and Python caches; ran make verify using installed host tools",
+  "environment": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "fresh_os_or_container": false,
+  "command_exit_code": 0,
+  "unit_checks": 12155,
+  "processor_runs": 75,
+  "differential_retirements": 2234,
+  "benchmark_runs": 18,
+  "byte_identical_generated_artifacts": [
+    "results/verification.json",
+    "results/benchmark.json",
+    "results/benchmark.csv",
+    "results/latency.svg",
+    "demo/data/manifest.json",
+    "demo/data/memory_copy.json",
+    "demo/data/array_sum.json",
+    "demo/data/search.json",
+    "demo/data/fibonacci.json",
+    "demo/data/arithmetic.json",
+    "demo/data/sort.json"
+  ],
+  "versions": {
+    "verilator": "Verilator 5.052 2026-09-05 rev vUNKNOWN-built20260905",
+    "python": "3.14.7",
+    "node": "26.5.0",
+    "compiler": "Apple Clang 17.0.0"
+  },
+  "limitations": [
+    "same host and installed toolchain; not an isolated OS/container",
+    "remote GitHub Actions has not run"
+  ],
+  "final_followup": "CSV output changed to LF line endings; benchmark and demo rebuilt in both directories and all 11 artifacts reconfirmed byte-identical."
+}

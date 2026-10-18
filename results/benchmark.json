@@ -1,0 +1,182 @@
+[
+  {
+    "program": "arithmetic",
+    "latency": 1,
+    "retired": 13,
+    "cycles": 56,
+    "cpi": 4.3076923076923075,
+    "wait_cycles": 0,
+    "requests": 15,
+    "stores": 1
+  },
+  {
+    "program": "arithmetic",
+    "latency": 2,
+    "retired": 13,
+    "cycles": 71,
+    "cpi": 5.461538461538462,
+    "wait_cycles": 15,
+    "requests": 15,
+    "stores": 1
+  },
+  {
+    "program": "arithmetic",
+    "latency": 4,
+    "retired": 13,
+    "cycles": 101,
+    "cpi": 7.769230769230769,
+    "wait_cycles": 45,
+    "requests": 15,
+    "stores": 1
+  },
+  {
+    "program": "array_sum",
+    "latency": 1,
+    "retired": 35,
+    "cycles": 150,
+    "cpi": 4.285714285714286,
+    "wait_cycles": 0,
+    "requests": 43,
+    "stores": 1
+  },
+  {
+    "program": "array_sum",
+    "latency": 2,
+    "retired": 35,
+    "cycles": 193,
+    "cpi": 5.514285714285714,
+    "wait_cycles": 43,
+    "requests": 43,
+    "stores": 1
+  },
+  {
+    "program": "array_sum",
+    "latency": 4,
+    "retired": 35,
+    "cycles": 279,
+    "cpi": 7.9714285714285715,
+    "wait_cycles": 129,
+    "requests": 43,
+    "stores": 1
+  },
+  {
+    "program": "fibonacci",
+    "latency": 1,
+    "retired": 88,
+    "cycles": 367,
+    "cpi": 4.170454545454546,
+    "wait_cycles": 0,
+    "requests": 101,
+    "stores": 12
+  },
+  {
+    "program": "fibonacci",
+    "latency": 2,
+    "retired": 88,
+    "cycles": 468,
+    "cpi": 5.318181818181818,
+    "wait_cycles": 101,
+    "requests": 101,
+    "stores": 12
+  },
+  {
+    "program": "fibonacci",
+    "latency": 4,
+    "retired": 88,
+    "cycles": 670,
+    "cpi": 7.613636363636363,
+    "wait_cycles": 303,
+    "requests": 101,
+    "stores": 12
+  },
+  {
+    "program": "memory_copy",
+    "latency": 1,
+    "retired": 99,
+    "cycles": 431,
+    "cpi": 4.353535353535354,
+    "wait_cycles": 0,
+    "requests": 132,
+    "stores": 16
+  },
+  {
+    "program": "memory_copy",
+    "latency": 2,
+    "retired": 99,
+    "cycles": 563,
+    "cpi": 5.686868686868687,
+    "wait_cycles": 132,
+    "requests": 132,
+    "stores": 16
+  },
+  {
+    "program": "memory_copy",
+    "latency": 4,
+    "retired": 99,
+    "cycles": 827,
+    "cpi": 8.353535353535353,
+    "wait_cycles": 396,
+    "requests": 132,
+    "stores": 16
+  },
+  {
+    "program": "search",
+    "latency": 1,
+    "retired": 33,
+    "cycles": 140,
+    "cpi": 4.242424242424242,
+    "wait_cycles": 0,
+    "requests": 39,
+    "stores": 0
+  },
+  {
+    "program": "search",
+    "latency": 2,
+    "retired": 33,
+    "cycles": 179,
+    "cpi": 5.424242424242424,
+    "wait_cycles": 39,
+    "requests": 39,
+    "stores": 0
+  },
+  {
+    "program": "search",
+    "latency": 4,
+    "retired": 33,
+    "cycles": 257,
+    "cpi": 7.787878787878788,
+    "wait_cycles": 117,
+    "requests": 39,
+    "stores": 0
+  },
+  {
+    "program": "sort",
+    "latency": 1,
+    "retired": 123,
+    "cycles": 537,
+    "cpi": 4.365853658536586,
+    "wait_cycles": 0,
+    "requests": 166,
+    "stores": 12
+  },
+  {
+    "program": "sort",
+    "latency": 2,
+    "retired": 123,
+    "cycles": 703,
+    "cpi": 5.715447154471545,
+    "wait_cycles": 166,
+    "requests": 166,
+    "stores": 12
+  },
+  {
+    "program": "sort",
+    "latency": 4,
+    "retired": 123,
+    "cycles": 1035,
+    "cpi": 8.414634146341463,
+    "wait_cycles": 498,
+    "requests": 166,
+    "stores": 12
+  }
+]
