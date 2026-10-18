@@ -10,6 +10,10 @@ Run `make verify` from the repository root. It builds the actual SystemVerilog w
 4. `verification/sim_main.cpp` clocks the Verilated core and acts as the memory responder. It records signals every cycle and rejects changed/withdrawn stalled requests. Stores are applied once per valid/ready acknowledgement. The Python runner rebuilds observed RAM from these events and compares all 32 registers, PC, instruction word, next PC, writeback data and the complete 64 KiB memory at each retirement. At halt it compares cause, value, fault PC, registers and memory. It also checks the exact successful store count against retired store instructions, catching duplicate writes even when repeated data leaves RAM unchanged.
 5. The benchmark checks the closed-form cycle equation as an additional measurement sanity check. `tools/check_artifacts.py` verifies trace hashes, embedded assembly, lengths, retirement/wait counts, results linkage, copied build assets, JavaScript syntax and chart XML.
 
+## Reset and restart checks
+
+`verification/reset_tb.sv` runs 12 scenarios at response latencies 2, 4 and 8: reset during a stalled fetch, load or store, and immediately after a store acknowledgment. The responder cancels outstanding requests and blocks acknowledgments/writes during reset, while retaining committed RAM. It checks reset PC/register/control state, exact post-reset retirement and store counts, and final data. A store acknowledged before reset remains committed; a stalled store is cancelled. The report records these checks separately from unit and differential counts. This verifies the documented responder contract, not exhaustive reset timing or arbitrary external buses.
+
 ## Upstream checks, with deliberately narrow scope
 
 The GitHub connector retrieved `riscv-software-src/riscv-tests` at pinned commit `d7e86f701b929b5d801f8cda1a4871ab05f452bb`. `third_party/riscv-tests-add.S` is the unmodified `isa/rv64ui/add.S`. Upstream `isa/rv32ui/add.S` includes that file with the XLEN environment changed. We extract exactly the 15 `TEST_RR_OP` arithmetic vectors (tests 2–16), truncate constants/expected values to 32 bits, load operands and compare RTL results to the upstream expected values. We retain their upstream BSD license.
@@ -20,7 +24,7 @@ This does **not** run the upstream macro harness, bypass tests, exception enviro
 
 The random seeds and the simulator version appear in `results/verification.json`. The directed memory delays are 1, 2 and 4 cycles; randomized runs use base delay 2 plus a uniform integer 0–5 for each request. Python generation and C++ memory scheduling each have an explicit seed. Verilator unit `$random` uses its deterministic default seed; no cross-simulator random-stream equivalence is promised.
 
-`build/runs/NAME.bin` is the exact executable image. `NAME.jsonl` contains cycle records. `directed-l2.vcd` and `bench-fibonacci-l2.vcd` contain waveforms, openable with a VCD viewer such as GTKWave. A sample Fibonacci VCD is retained in `results/fibonacci-l2.vcd`; the full set is regenerated under `build/`. JSONL files for all tests remain under ignored `build/`; compact full-cycle traces for the six latency-2 demos are checked in under `demo/data/` with SHA-256 hashes in their manifest.
+`build/runs/NAME.bin` is the exact executable image. `NAME.jsonl` contains cycle records. `directed-l2.vcd` and `bench-fibonacci-l2.vcd` contain waveforms, openable with a VCD viewer such as GTKWave. A sample Fibonacci VCD is retained in `results/fibonacci-l2.vcd`; the full set is regenerated under `build/`. JSONL files for all tests remain under ignored `build/`; compact full-cycle traces for the 18 demos at latencies 1, 2 and 4 are checked in under `demo/data/` with SHA-256 hashes in their manifest.
 
 Direct simulator invocation:
 
@@ -33,4 +37,4 @@ Arguments are image, JSONL output, fixed minimum latency, optional jitter, seed,
 
 ## Remaining gaps
 
-No exhaustive proof, external full-model differential, constrained random backward control flow, interrupt testing, mid-transaction reset test, multi-agent memory ordering test, synthesis report or timing closure. The harness’s 64 KiB RAM and demonstrated programs bound observed addresses; hardware wraparound is still implemented as 32-bit arithmetic. GitHub CI has passed on Ubuntu 24.04, including exact reproduction of the committed measurements; see `results/publication.json` for the run URL and tool versions.
+No exhaustive proof, external full-model differential, constrained random backward control flow, interrupt testing, exhaustive reset-timing tests, multi-agent memory ordering test, synthesis report or timing closure. The harness’s 64 KiB RAM and demonstrated programs bound observed addresses; hardware wraparound is still implemented as 32-bit arithmetic. GitHub CI has passed on Ubuntu 24.04, including exact reproduction of the committed measurements; see `results/publication.json` for the run URL and tool versions.

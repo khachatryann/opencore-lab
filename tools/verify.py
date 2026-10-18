@@ -71,6 +71,9 @@ def randomized(seed):
 def main():
     unit=subprocess.run([str(ROOT/'build/unit/Vunit_tb')],check=True,capture_output=True,text=True).stdout
     unit_count=int(re.search(r'UNIT_CHECKS=(\d+)',unit)[1])
+    reset=subprocess.run([str(ROOT/'build/reset/Vreset_tb')],check=True,capture_output=True,text=True).stdout
+    reset_scenarios=int(re.search(r'RESET_SCENARIOS=(\d+)',reset)[1])
+    reset_checks=int(re.search(r'RESET_CHECKS=(\d+)',reset)[1])
     summaries=[];coverage=Counter(); seeds=[7,42,2026,0xc0ffee,0xdeadbeef]
     def run(name,source,latency=1,jitter=0,seed=1,wave=False):
         stats,frames,ref,_,_=run_case(name,source,latency,jitter,seed,wave)
@@ -130,11 +133,13 @@ def main():
         except ValueError: pass
         else: raise AssertionError('assembler accepted '+text)
     report={'passed':True,'unit_checks':unit_count,'processor_runs':len(summaries),
+            'reset_scenarios':reset_scenarios,'reset_checks':reset_checks,
             'differential_retirements':sum(s['retired'] for s in summaries),
             'random_seeds':seeds,'upstream_add_vectors':len(matches),'coverage':dict(sorted(coverage.items())),
             'runs':summaries,'verilator':subprocess.check_output(['verilator','--version'],text=True).strip(),
             'python':sys.version.split()[0]}
     (ROOT/'results/verification.json').write_text(json.dumps(report,indent=2)+'\n')
     print(f"PASS: {unit_count} unit checks, {len(summaries)} processor runs, {report['differential_retirements']} differential retirements; {len(matches)} upstream ADD vectors")
+    print(f"PASS: {reset_scenarios} reset/restart scenarios, {reset_checks} reset checks")
 
 if __name__=='__main__': main()

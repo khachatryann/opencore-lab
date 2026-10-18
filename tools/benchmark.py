@@ -34,8 +34,10 @@ def bars(rows):
 
 def main():
     rows=[];data=ROOT/'demo/data';data.mkdir(exist_ok=True)
-    manifest={'schema':1,'source':'Verilator RTL trace playback','memory_window':[1024,1152],'programs':[]}
+    manifest={'schema':2,'source':'Verilator RTL trace playback','memory_window':[1024,1152],
+              'latencies':[1,2,4],'programs':[]}
     for path in sorted((ROOT/'examples').glob('*.S')):
+        variants=[]
         for lat in [1,2,4]:
             stats,frames,ref,listing,image=run_case(f'bench-{path.stem}-l{lat}',path.read_text(),lat,wave=path.stem=='fibonacci' and lat==2)
             assert stats['cause']==3
@@ -45,14 +47,16 @@ def main():
             assert stats['wait_cycles']==(lat-1)*stats['requests']
             row={'program':path.stem,**{k:stats[k] for k in ['latency','retired','cycles','cpi','wait_cycles','requests','stores']}}
             rows.append(row)
-            if lat==2:
-                payload={'program':path.stem,'source':'Actual Verilator RTL simulation; trace playback',
-                         'latency':lat,'stats':row,'assembly':path.read_text(),
-                         'listing':listing,'initial_memory':list(image[1024:1152].ljust(128,b'\0')),'frames':frames}
-                target=data/(path.stem+'.json')
-                target.write_text(json.dumps(payload,separators=(',',':'))+'\n')
-                manifest['programs'].append({'id':path.stem,'file':target.name,'frames':len(frames),
-                    'sha256':hashlib.sha256(target.read_bytes()).hexdigest()})
+            payload={'program':path.stem,'source':'Actual Verilator RTL simulation; trace playback',
+                     'latency':lat,'stats':row,'assembly':path.read_text(),
+                     'listing':listing,'initial_memory':list(image[1024:1152].ljust(128,b'\0')),'frames':frames}
+            target=data/(path.stem+('' if lat==2 else f'-l{lat}')+'.json')
+            target.write_text(json.dumps(payload,separators=(',',':'))+'\n')
+            variants.append({'latency':lat,'file':target.name,'frames':len(frames),'stats':row,
+                'sha256':hashlib.sha256(target.read_bytes()).hexdigest()})
+        default=next(v for v in variants if v['latency']==2)
+        manifest['programs'].append({'id':path.stem,**{k:default[k] for k in ('file','frames','sha256')},
+                                    'variants':variants})
     (data/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     (ROOT/'results/benchmark.json').write_text(json.dumps(rows,indent=2)+'\n')
     with (ROOT/'results/benchmark.csv').open('w') as f:

@@ -24,13 +24,13 @@ The demo requires no API keys, paid services, npm packages or external assets. `
 ## What is inside
 
 - **Hardware:** PC, strict decoder, 32-register file, ALU and a multi-cycle controller. Little-endian byte/halfword/word operations use a stable single-outstanding request/response interface, including variable memory delays and access errors.
-- **Verification:** unit tests, directed edge cases, reproducible randomized programs, retirement-by-retirement comparison against an in-house Python interpreter, exact successful-store counts, trap checks and VCD waveforms.
+- **Verification:** unit tests, directed edge cases, reproducible randomized programs, retirement-by-retirement comparison against an in-house Python interpreter, exact successful-store counts, trap checks, reset/restart tests and VCD waveforms.
 - **Six programs:** arithmetic/bit operations, Fibonacci, array sum, bubble sort, byte copy and linear search. Readable assembly and a bounded two-pass assembler produce raw executable images.
-- **Browser:** labeled datapath, current instruction/PC, active state and paths, registers with changes, reconstructed data memory, explanations, program selection, play/pause, speed, reset, cycle and instruction stepping.
+- **Browser:** labeled datapath, current instruction/PC, active state and paths, registers with changes, reconstructed data memory, explanations, program and memory-latency selection, measured cycle/CPI/wait counters, play/pause, speed, reset, cycle and instruction stepping.
 
 ## Verified results
 
-On the tested local toolchain, the regression passed **12,155 unit checks**, **75 processor runs** and **2,234 differential retirement comparisons**, including **15 adapted upstream ADD vectors**. All six examples also have independent expected-output assertions. A separate **18-run RTL benchmark** checks every retirement and its cycle-accounting equation. A clean-source rebuild on the same host passed. Exact records: [verification JSON](results/verification.json), [reproduction record](results/reproduction.json), [browser QA](results/browser-qa.json).
+On the tested local toolchain, the regression passed **12,155 unit checks**, **75 processor runs** and **2,234 differential retirement comparisons**, including **15 adapted upstream ADD vectors**. A separate reset testbench passes **12 reset/restart scenarios** with **1,356 assertions**. All six examples also have independent expected-output assertions. A separate **18-run RTL benchmark** checks every retirement and its cycle-accounting equation. A clean-source rebuild on the same host passed. Exact records: [verification JSON](results/verification.json), [reproduction record](results/reproduction.json), [initial browser QA](results/browser-qa.json), [latency explorer QA](results/latency-upgrade-qa.json).
 
 | Program | Retired | Cycles at L=1 | L=2 | L=4 |
 | --- | ---: | ---: | ---: | ---: |
@@ -69,7 +69,7 @@ Arithmetic operations need four state visits; loads/stores add a memory visit. A
 | `verification/` | Unit testbench, C++ simulator harness, architectural model and runner |
 | `tools/` | Assembler, regression, benchmark, report and static build tools |
 | `examples/` | Six assembly programs |
-| `demo/` | Static UI and actual latency-2 RTL traces |
+| `demo/` | Static UI and 18 RTL traces at latencies 1, 2 and 4 |
 | `results/` | Measured JSON/CSV/chart and QA/rebuild records |
 | `docs/` | Architecture, support matrix, report, learning guide and screenshots |
 | `third_party/` | Pinned upstream ADD source and its BSD license |

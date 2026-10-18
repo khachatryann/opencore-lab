@@ -11,7 +11,7 @@ const meta={
 };
 const stateNames=['FETCH','DECODE','EXECUTE','MEMORY','WRITEBACK','HALT'];
 const hex=(n,width=8)=>'0x'+(n>>>0).toString(16).padStart(width,'0');
-let manifest,trace,index=0,timer=null,loadToken=0;
+let manifest,trace,index=0,timer=null,loadToken=0,selectedProgram='fibonacci',selectedLatency=2;
 function pause(){if(timer!==null)clearInterval(timer);timer=null;$('#play').textContent='▶ Play';}
 function memoryAt(i){
  const mem=Uint8Array.from(trace.initial_memory);
@@ -41,7 +41,7 @@ function explanation(f){
   return ['Compute and latch the result',`The ALU sees A = ${hex(f.a)} and B = ${hex(f.b)}. Its sampled result is ${hex(f.alu)}. The execute edge saves this value for writeback.`];
  }
  case 3:return [f.write?'Store to data memory':'Load from data memory',`${f.write?'A store':'A load'} requests aligned word ${hex(f.addr)}. ${f.ready?(f.write?`Memory acknowledges once; byte enable ${f.mask.toString(2).padStart(4,'0')} selects the written lanes.`:'Memory responds; the core extracts the requested byte, halfword, or word and extends it if needed.'):'No response yet. The address, write data, and byte enables remain stable.'}`];
- case 4:return ['Retire the instruction',`${f.rd?`x${f.rd} receives ${hex(f.rd_data)}. `:'No general-purpose register changes. '}The architectural PC becomes ${hex(f.retire_next_pc)}. This is the point checked against the independent reference model.`];
+ case 4:return ['Retire the instruction',`${f.rd?`x${f.rd} receives ${hex(f.rd_data)}. `:'No general-purpose register changes. '}The architectural PC becomes ${hex(f.retire_next_pc)}. This is the point checked against the project’s reference model.`];
  default:return ['Processor halted','A terminal execution-environment trap stopped the core.'];
  }
 }
@@ -91,19 +91,37 @@ function play(){
  if(index===trace.frames.length-1)index=0;
  $('#play').textContent='Ⅱ Pause';timer=setInterval(advance,Number($('#speed').value));render();
 }
-async function select(id){
- const token=++loadToken;pause();$('#loading').hidden=false;$('#loading').textContent='Loading verified RTL trace…';
+function loading(active){
+ $('#workspace').setAttribute('aria-busy',String(active));
+ for(const id of ['play','step','instruction','reset','timeline'])$('#'+id).disabled=active;
+}
+async function select(id,latency=selectedLatency){
+ selectedProgram=id;selectedLatency=latency;
+ const token=++loadToken;pause();loading(true);$('#loading').hidden=false;
+ $('#loading').textContent=`Loading ${meta[id][1]} with ${latency}-cycle memory…`;
  try{
-  const entry=manifest.programs.find(p=>p.id===id);
-  const response=await fetch('data/'+entry.file);if(!response.ok)throw new Error('Trace could not be loaded');
+  const program=manifest.programs.find(p=>p.id===id);
+  const entry=program.variants.find(v=>v.latency===latency);
+  const response=await fetch('data/'+entry.file);if(!response.ok)throw new Error('Trace could not be loaded. Choose a program or memory latency to retry.');
   const next=await response.json();if(token!==loadToken)return;
   trace=next;index=0;
   const [kicker,title,desc]=meta[id];$('#program-kicker').textContent=kicker;$('#program-title').textContent=title;$('#program-desc').textContent=desc;
   $('#source').textContent=trace.assembly;$('#timeline').max=trace.frames.length-1;
+  $('#latency').value=latency;$('#memory-tag').textContent=`${latency}-CYCLE MEMORY`;
+  $('#metric-cycles').textContent=trace.stats.cycles;
+  $('#metric-retired').textContent=trace.stats.retired;
+  $('#metric-waits').textContent=trace.stats.wait_cycles;
+  $('#metric-cpi').textContent=trace.stats.cpi.toFixed(3);
+  const baseline=program.variants.find(v=>v.latency===1).stats;
+  $('#latency-explanation').textContent=latency===1
+   ? `Baseline: memory responds on the first request edge. There are no waiting cycles. ${baseline.retired} instructions retire.`
+   : `${trace.stats.requests} memory requests × ${latency-1} extra ${latency===2?'cycle':'cycles'} = ${trace.stats.wait_cycles} waiting cycles. The program still retires ${baseline.retired} instructions; total cycles are ${(trace.stats.cycles/baseline.cycles).toFixed(2)}× the one-cycle baseline.`;
   document.querySelectorAll('.program').forEach(b=>{b.classList.toggle('active',b.dataset.program===id);b.setAttribute('aria-pressed',String(b.dataset.program===id));});
-  $('#loading').hidden=true;render();
- }catch(e){if(token===loadToken){$('#loading').hidden=false;$('#loading').textContent=e.message;}}
+  $('#loading').hidden=true;loading(false);render();
+ }catch(e){if(token===loadToken){$('#workspace').setAttribute('aria-busy','false');$('#loading').hidden=false;$('#loading').textContent=e.message;}}
 }
+loading(true);
+$('#latency').addEventListener('change',e=>select(selectedProgram,Number(e.target.value)));
 $('#play').addEventListener('click',play);$('#step').addEventListener('click',()=>{pause();advance();});
 $('#reset').addEventListener('click',()=>{pause();if(trace){index=0;render();}});
 $('#instruction').addEventListener('click',()=>{pause();if(!trace)return;do{index++;}while(index<trace.frames.length-1&&!trace.frames[index].retire);render();});
