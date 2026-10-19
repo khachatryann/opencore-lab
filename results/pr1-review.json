@@ -1,0 +1,215 @@
+{
+  "date": "2026-10-19",
+  "pull_request": "https://github.com/khachatryann/opencore-lab/pull/1",
+  "original_reviewed_head": "254f328b4efea6de7611a4477179df18f975f82f",
+  "original_checks": {
+    "push_run": "https://github.com/khachatryann/opencore-lab/actions/runs/39154908489",
+    "pull_request_run": "https://github.com/khachatryann/opencore-lab/actions/runs/39274583367",
+    "both_match_original_head": true
+  },
+  "changes_from_review": [
+    "Block Space-key playback of stale data while loading or after a failed trace fetch",
+    "Add actual-page-script regression for controlled loading, failed fetch, recovery, response races and cancellation"
+  ],
+  "verification": {
+    "original_clean_workflow": "make clean verify",
+    "final_workflow": "make verify",
+    "unit_checks": 12155,
+    "processor_runs": 75,
+    "differential_retirements": 2234,
+    "upstream_add_vectors": 15,
+    "reset_scenarios": 12,
+    "reset_assertions": 1356,
+    "benchmarks": 18,
+    "all_measurement_and_trace_files_reproduced": true,
+    "loading_regression": "passed"
+  },
+  "browser": {
+    "desktop_viewport": [
+      1440,
+      1000
+    ],
+    "mobile_viewport": [
+      375,
+      812
+    ],
+    "combinations_per_viewport": 18,
+    "displayed_measurements_match_simulated_artifacts": true,
+    "final_registers_compared_per_combination": 32,
+    "final_memory_words_compared_per_combination": 32,
+    "final_states_identical_across_latencies": true,
+    "mobile_document_width": 375,
+    "play_pause_reset_cycle_instruction_speed_controls": "passed",
+    "evidence_links": "source, verification workflow, technical report, AI assistance",
+    "captured_browser_warnings_or_errors": []
+  },
+  "measured_combinations": [
+    {
+      "program": "fibonacci",
+      "latency": "1",
+      "cycles": "367",
+      "retired": "88",
+      "waits": "0",
+      "cpi": "4.170",
+      "status": "HALTED"
+    },
+    {
+      "program": "fibonacci",
+      "latency": "2",
+      "cycles": "468",
+      "retired": "88",
+      "waits": "101",
+      "cpi": "5.318",
+      "status": "HALTED"
+    },
+    {
+      "program": "fibonacci",
+      "latency": "4",
+      "cycles": "670",
+      "retired": "88",
+      "waits": "303",
+      "cpi": "7.614",
+      "status": "HALTED"
+    },
+    {
+      "program": "arithmetic",
+      "latency": "1",
+      "cycles": "56",
+      "retired": "13",
+      "waits": "0",
+      "cpi": "4.308",
+      "status": "HALTED"
+    },
+    {
+      "program": "arithmetic",
+      "latency": "2",
+      "cycles": "71",
+      "retired": "13",
+      "waits": "15",
+      "cpi": "5.462",
+      "status": "HALTED"
+    },
+    {
+      "program": "arithmetic",
+      "latency": "4",
+      "cycles": "101",
+      "retired": "13",
+      "waits": "45",
+      "cpi": "7.769",
+      "status": "HALTED"
+    },
+    {
+      "program": "array_sum",
+      "latency": "1",
+      "cycles": "150",
+      "retired": "35",
+      "waits": "0",
+      "cpi": "4.286",
+      "status": "HALTED"
+    },
+    {
+      "program": "array_sum",
+      "latency": "2",
+      "cycles": "193",
+      "retired": "35",
+      "waits": "43",
+      "cpi": "5.514",
+      "status": "HALTED"
+    },
+    {
+      "program": "array_sum",
+      "latency": "4",
+      "cycles": "279",
+      "retired": "35",
+      "waits": "129",
+      "cpi": "7.971",
+      "status": "HALTED"
+    },
+    {
+      "program": "sort",
+      "latency": "1",
+      "cycles": "537",
+      "retired": "123",
+      "waits": "0",
+      "cpi": "4.366",
+      "status": "HALTED"
+    },
+    {
+      "program": "sort",
+      "latency": "2",
+      "cycles": "703",
+      "retired": "123",
+      "waits": "166",
+      "cpi": "5.715",
+      "status": "HALTED"
+    },
+    {
+      "program": "sort",
+      "latency": "4",
+      "cycles": "1035",
+      "retired": "123",
+      "waits": "498",
+      "cpi": "8.415",
+      "status": "HALTED"
+    },
+    {
+      "program": "memory_copy",
+      "latency": "1",
+      "cycles": "431",
+      "retired": "99",
+      "waits": "0",
+      "cpi": "4.354",
+      "status": "HALTED"
+    },
+    {
+      "program": "memory_copy",
+      "latency": "2",
+      "cycles": "563",
+      "retired": "99",
+      "waits": "132",
+      "cpi": "5.687",
+      "status": "HALTED"
+    },
+    {
+      "program": "memory_copy",
+      "latency": "4",
+      "cycles": "827",
+      "retired": "99",
+      "waits": "396",
+      "cpi": "8.354",
+      "status": "HALTED"
+    },
+    {
+      "program": "search",
+      "latency": "1",
+      "cycles": "140",
+      "retired": "33",
+      "waits": "0",
+      "cpi": "4.242",
+      "status": "HALTED"
+    },
+    {
+      "program": "search",
+      "latency": "2",
+      "cycles": "179",
+      "retired": "33",
+      "waits": "39",
+      "cpi": "5.424",
+      "status": "HALTED"
+    },
+    {
+      "program": "search",
+      "latency": "4",
+      "cycles": "257",
+      "retired": "33",
+      "waits": "117",
+      "cpi": "7.788",
+      "status": "HALTED"
+    }
+  ],
+  "limitations": [
+    "Browser observations are manual tool-driven QA, not a CI browser suite",
+    "The reference interpreter is in-house; only 15 upstream ADD vectors are adapted",
+    "No architectural certification, formal proof, synthesis, FPGA deployment or physical measurements claimed"
+  ]
+}

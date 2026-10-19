@@ -86,7 +86,7 @@ function render(){
 }
 function advance(){if(!trace)return;if(index<trace.frames.length-1)index++;render();}
 function play(){
- if(!trace)return;
+ if(!trace || $('#play').disabled)return;
  if(timer!==null){pause();return;}
  if(index===trace.frames.length-1)index=0;
  $('#play').textContent='Ⅱ Pause';timer=setInterval(advance,Number($('#speed').value));render();

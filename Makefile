@@ -20,6 +20,7 @@ demo:
 	$(PYTHON) tools/build_demo.py
 verify: test benchmark demo
 	$(PYTHON) tools/check_artifacts.py
+	node verification/demo_loading_test.js
 serve:
 	$(PYTHON) -m http.server 8000 --directory dist --bind 127.0.0.1
 clean:
