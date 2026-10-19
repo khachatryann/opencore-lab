@@ -2,6 +2,8 @@
   "passed": true,
   "unit_checks": 12155,
   "processor_runs": 75,
+  "reset_scenarios": 12,
+  "reset_checks": 1356,
   "differential_retirements": 2234,
   "random_seeds": [
     7,

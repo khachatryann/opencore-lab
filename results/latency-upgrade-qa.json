@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-18",
+  "method": "Browser interactions through Codex in-app browser against the local static build",
+  "program_latency_checks": [
+    {
+      "program": "01 Fibonacci",
+      "latency": "1",
+      "cycles": "367",
+      "halt": "HALTED"
+    },
+    {
+      "program": "01 Fibonacci",
+      "latency": "2",
+      "cycles": "468",
+      "halt": "HALTED"
+    },
+    {
+      "program": "01 Fibonacci",
+      "latency": "4",
+      "cycles": "670",
+      "halt": "HALTED"
+    },
+    {
+      "program": "02 Arithmetic & bits",
+      "latency": "1",
+      "cycles": "56",
+      "halt": "HALTED"
+    },
+    {
+      "program": "02 Arithmetic & bits",
+      "latency": "2",
+      "cycles": "71",
+      "halt": "HALTED"
+    },
+    {
+      "program": "02 Arithmetic & bits",
+      "latency": "4",
+      "cycles": "101",
+      "halt": "HALTED"
+    },
+    {
+      "program": "03 Array sum",
+      "latency": "1",
+      "cycles": "150",
+      "halt": "HALTED"
+    },
+    {
+      "program": "03 Array sum",
+      "latency": "2",
+      "cycles": "193",
+      "halt": "HALTED"
+    },
+    {
+      "program": "03 Array sum",
+      "latency": "4",
+      "cycles": "279",
+      "halt": "HALTED"
+    },
+    {
+      "program": "04 Bubble sort",
+      "latency": "1",
+      "cycles": "537",
+      "halt": "HALTED"
+    },
+    {
+      "program": "04 Bubble sort",
+      "latency": "2",
+      "cycles": "703",
+      "halt": "HALTED"
+    },
+    {
+      "program": "04 Bubble sort",
+      "latency": "4",
+      "cycles": "1035",
+      "halt": "HALTED"
+    },
+    {
+      "program": "05 Memory copy",
+      "latency": "1",
+      "cycles": "431",
+      "halt": "HALTED"
+    },
+    {
+      "program": "05 Memory copy",
+      "latency": "2",
+      "cycles": "563",
+      "halt": "HALTED"
+    },
+    {
+      "program": "05 Memory copy",
+      "latency": "4",
+      "cycles": "827",
+      "halt": "HALTED"
+    },
+    {
+      "program": "06 Linear search",
+      "latency": "1",
+      "cycles": "140",
+      "halt": "HALTED"
+    },
+    {
+      "program": "06 Linear search",
+      "latency": "2",
+      "cycles": "179",
+      "halt": "HALTED"
+    },
+    {
+      "program": "06 Linear search",
+      "latency": "4",
+      "cycles": "257",
+      "halt": "HALTED"
+    }
+  ],
+  "final_architectural_state_identical_across_latencies": true,
+  "play_pause_cycle_instruction_reset_controls": "passed",
+  "mobile": {
+    "width": 375,
+    "height": 812,
+    "document_width": 375
+  },
+  "desktop_screenshot": "Captured during review; user-facing output supplied separately",
+  "clean_build": "make clean verify passed",
+  "limitations": [
+    "Browser checks are recorded observations, not a CI browser test suite",
+    "Reference-model independence and architectural certification are unchanged"
+  ]
+}

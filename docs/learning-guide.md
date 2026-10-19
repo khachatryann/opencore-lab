@@ -40,7 +40,7 @@ Write down a prediction, inspect a trace, then verify it with the benchmark equa
 
 **Improve the verification oracle.** Add a Spike or Sail adapter, comparing architectural state and exception events to a separate implementation. Resolve the local terminal-trap environment explicitly; do not suppress mismatches to obtain a pass. Alternatively expose RVFI signals and investigate riscv-formal, including memory assumptions.
 
-**Add memory backpressure tests.** Vary only instruction responses versus only data responses; report both request counts. Add resets during a stalled store and define cancellation for both the core and memory responder. This addresses an acknowledged current gap.
+**Add memory backpressure tests.** Vary only instruction responses versus only data responses; report both request counts. Extend the existing reset scenarios to additional interruption edges and fault responses. The current reset bench defines cancellation for both the core and memory responder.
 
 **Reuse a single arithmetic adder.** The current implementation has a main ALU plus target-generation expressions. Introduce operand muxes and extra states where required. Verify the same programs and compare state/cycle counts. Measure synthesized area before claiming area savings.
 
@@ -53,3 +53,7 @@ Write down a prediction, inspect a trace, then verify it with the benchmark equa
 The included assembler accepts lowercase RV32I mnemonics, x0–x31 register names, labels, numeric immediates, `offset(xN)` memory operands, `.org`, `.word`, `.byte`, and `#` comments. `nop` is supported. `fence` takes no operands and emits a conservative full fence. Branch/JAL labels are PC-relative; a numeric argument is a literal byte offset. LUI/AUIPC take the unsigned upper 20-bit field, as standard assembly does. Labels as immediate values are absolute. Data words accept signed or unsigned 32-bit literals.
 
 There is no ELF, linker, ABI register aliases, relaxation, macros, expression evaluation, relocation syntax, sections, string directives, pseudo-`li`/`la`/`ret`, or automatic large-constant expansion. Images are raw little-endian bytes starting at zero. The test helper's `li` routine expands constants to LUI/ADDI outside the assembler. Code/data separation is a program convention; example code begins at zero and data at 0x400. Input bounds and alignment are rejected rather than silently relaxed.
+
+## Compare memory latency interactively
+
+Choose Fibonacci, then switch Memory response time from 1 to 4 cycles. Record total cycles, waiting cycles, and retired instructions. Explain why the instruction count stays at 88 while cycles rise from 367 to 670. Repeat with memory copy and explain the difference using request counts. These are separately simulated RTL recordings, not a change to animation speed.

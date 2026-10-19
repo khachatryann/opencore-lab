@@ -38,7 +38,7 @@ Then visit <http://127.0.0.1:8000>. Serve over HTTP: opening `index.html` via `f
 
 ## Clean reproduction
 
-`make clean && make verify` rebuilds the simulator, runs every regression and benchmark, regenerates all demo traces and charts, builds the static site, and checks linkage. Generated simulation objects, images, JSONL traces and VCD files are ignored under `build/`; the benchmark summaries and six educational playback traces are tracked for immediate inspection and build-only hosting.
+`make clean && make verify` rebuilds the simulator, runs every regression and benchmark, regenerates all demo traces and charts, builds the static site, and checks linkage. Generated simulation objects, images, JSONL traces and VCD files are ignored under `build/`; the benchmark summaries and 18 educational playback traces are tracked for immediate inspection and build-only hosting.
 
 During delivery, the source tree was copied to a fresh directory excluding `.git`, `build`, `dist` and Python caches; `make verify` was run there using the already-installed host toolchain. See `results/reproduction.json` for actual results. This is a clean source rebuild on the same host, not a fresh OS/container test. After publication, GitHub CI passed on Ubuntu 24.04 and reproduced the measured artifacts; its separate evidence is in `results/publication.json`.
 

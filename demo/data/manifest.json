@@ -1,46 +1,351 @@
 {
-  "schema": 1,
+  "schema": 2,
   "source": "Verilator RTL trace playback",
   "memory_window": [
     1024,
     1152
+  ],
+  "latencies": [
+    1,
+    2,
+    4
   ],
   "programs": [
     {
       "id": "arithmetic",
       "file": "arithmetic.json",
       "frames": 71,
-      "sha256": "12813248b1a4d889d875e280887825daf58f7b5ea7a993c6e6cbd8588081215e"
+      "sha256": "12813248b1a4d889d875e280887825daf58f7b5ea7a993c6e6cbd8588081215e",
+      "variants": [
+        {
+          "latency": 1,
+          "file": "arithmetic-l1.json",
+          "frames": 56,
+          "stats": {
+            "program": "arithmetic",
+            "latency": 1,
+            "retired": 13,
+            "cycles": 56,
+            "cpi": 4.3076923076923075,
+            "wait_cycles": 0,
+            "requests": 15,
+            "stores": 1
+          },
+          "sha256": "59072dfc2ef1546a52c52764f0a79a44d742060ef0bcc811eee06c37c5cf7bfc"
+        },
+        {
+          "latency": 2,
+          "file": "arithmetic.json",
+          "frames": 71,
+          "stats": {
+            "program": "arithmetic",
+            "latency": 2,
+            "retired": 13,
+            "cycles": 71,
+            "cpi": 5.461538461538462,
+            "wait_cycles": 15,
+            "requests": 15,
+            "stores": 1
+          },
+          "sha256": "12813248b1a4d889d875e280887825daf58f7b5ea7a993c6e6cbd8588081215e"
+        },
+        {
+          "latency": 4,
+          "file": "arithmetic-l4.json",
+          "frames": 101,
+          "stats": {
+            "program": "arithmetic",
+            "latency": 4,
+            "retired": 13,
+            "cycles": 101,
+            "cpi": 7.769230769230769,
+            "wait_cycles": 45,
+            "requests": 15,
+            "stores": 1
+          },
+          "sha256": "ca5226959828be9a82972ce5245efdea751c8217e775e7f4b3c0ca5297f7b2ae"
+        }
+      ]
     },
     {
       "id": "array_sum",
       "file": "array_sum.json",
       "frames": 193,
-      "sha256": "f9ef433e9f8b56a9cab81bb37ef4c3cc3c77be00dc04532bbf71d5c51504a4b6"
+      "sha256": "f9ef433e9f8b56a9cab81bb37ef4c3cc3c77be00dc04532bbf71d5c51504a4b6",
+      "variants": [
+        {
+          "latency": 1,
+          "file": "array_sum-l1.json",
+          "frames": 150,
+          "stats": {
+            "program": "array_sum",
+            "latency": 1,
+            "retired": 35,
+            "cycles": 150,
+            "cpi": 4.285714285714286,
+            "wait_cycles": 0,
+            "requests": 43,
+            "stores": 1
+          },
+          "sha256": "afa7aa39da71b2cb926b35263c011bfe955dad1f2b742839b74b7340073ca7c5"
+        },
+        {
+          "latency": 2,
+          "file": "array_sum.json",
+          "frames": 193,
+          "stats": {
+            "program": "array_sum",
+            "latency": 2,
+            "retired": 35,
+            "cycles": 193,
+            "cpi": 5.514285714285714,
+            "wait_cycles": 43,
+            "requests": 43,
+            "stores": 1
+          },
+          "sha256": "f9ef433e9f8b56a9cab81bb37ef4c3cc3c77be00dc04532bbf71d5c51504a4b6"
+        },
+        {
+          "latency": 4,
+          "file": "array_sum-l4.json",
+          "frames": 279,
+          "stats": {
+            "program": "array_sum",
+            "latency": 4,
+            "retired": 35,
+            "cycles": 279,
+            "cpi": 7.9714285714285715,
+            "wait_cycles": 129,
+            "requests": 43,
+            "stores": 1
+          },
+          "sha256": "3392348f37619180661ff2a2312383afdbb7a818937683e9b0ef8a0892f42733"
+        }
+      ]
     },
     {
       "id": "fibonacci",
       "file": "fibonacci.json",
       "frames": 468,
-      "sha256": "7dd5a292ec8af5c3e4696cf83ee7c673bc2a2625d8dc0e3e15259a5d00768688"
+      "sha256": "7dd5a292ec8af5c3e4696cf83ee7c673bc2a2625d8dc0e3e15259a5d00768688",
+      "variants": [
+        {
+          "latency": 1,
+          "file": "fibonacci-l1.json",
+          "frames": 367,
+          "stats": {
+            "program": "fibonacci",
+            "latency": 1,
+            "retired": 88,
+            "cycles": 367,
+            "cpi": 4.170454545454546,
+            "wait_cycles": 0,
+            "requests": 101,
+            "stores": 12
+          },
+          "sha256": "7330ccdfdec9ab5c3aed393dd6463e6622e85a0a04d048880d674337c76b255d"
+        },
+        {
+          "latency": 2,
+          "file": "fibonacci.json",
+          "frames": 468,
+          "stats": {
+            "program": "fibonacci",
+            "latency": 2,
+            "retired": 88,
+            "cycles": 468,
+            "cpi": 5.318181818181818,
+            "wait_cycles": 101,
+            "requests": 101,
+            "stores": 12
+          },
+          "sha256": "7dd5a292ec8af5c3e4696cf83ee7c673bc2a2625d8dc0e3e15259a5d00768688"
+        },
+        {
+          "latency": 4,
+          "file": "fibonacci-l4.json",
+          "frames": 670,
+          "stats": {
+            "program": "fibonacci",
+            "latency": 4,
+            "retired": 88,
+            "cycles": 670,
+            "cpi": 7.613636363636363,
+            "wait_cycles": 303,
+            "requests": 101,
+            "stores": 12
+          },
+          "sha256": "b9f69bcdb798a4b88c3d13e0c3a2354e4079f8ecfc76c447027622291c80fe1b"
+        }
+      ]
     },
     {
       "id": "memory_copy",
       "file": "memory_copy.json",
       "frames": 563,
-      "sha256": "cb92154126761224ee31ad9b1e9a6fe70b12513a4a95883f567fa627c8f4991e"
+      "sha256": "cb92154126761224ee31ad9b1e9a6fe70b12513a4a95883f567fa627c8f4991e",
+      "variants": [
+        {
+          "latency": 1,
+          "file": "memory_copy-l1.json",
+          "frames": 431,
+          "stats": {
+            "program": "memory_copy",
+            "latency": 1,
+            "retired": 99,
+            "cycles": 431,
+            "cpi": 4.353535353535354,
+            "wait_cycles": 0,
+            "requests": 132,
+            "stores": 16
+          },
+          "sha256": "bee9eee998073d024f5edbb2d64e40c7a0d5e8e5d591a362623250ab71641a54"
+        },
+        {
+          "latency": 2,
+          "file": "memory_copy.json",
+          "frames": 563,
+          "stats": {
+            "program": "memory_copy",
+            "latency": 2,
+            "retired": 99,
+            "cycles": 563,
+            "cpi": 5.686868686868687,
+            "wait_cycles": 132,
+            "requests": 132,
+            "stores": 16
+          },
+          "sha256": "cb92154126761224ee31ad9b1e9a6fe70b12513a4a95883f567fa627c8f4991e"
+        },
+        {
+          "latency": 4,
+          "file": "memory_copy-l4.json",
+          "frames": 827,
+          "stats": {
+            "program": "memory_copy",
+            "latency": 4,
+            "retired": 99,
+            "cycles": 827,
+            "cpi": 8.353535353535353,
+            "wait_cycles": 396,
+            "requests": 132,
+            "stores": 16
+          },
+          "sha256": "7a418388c86958ad53c7d1ead3cb3b9eace67caf2dc64d455b076fb4e7aabd1c"
+        }
+      ]
     },
     {
       "id": "search",
       "file": "search.json",
       "frames": 179,
-      "sha256": "7069878df7fa1957736272982f4435e1d820e08981e79302b3314be04ba52770"
+      "sha256": "7069878df7fa1957736272982f4435e1d820e08981e79302b3314be04ba52770",
+      "variants": [
+        {
+          "latency": 1,
+          "file": "search-l1.json",
+          "frames": 140,
+          "stats": {
+            "program": "search",
+            "latency": 1,
+            "retired": 33,
+            "cycles": 140,
+            "cpi": 4.242424242424242,
+            "wait_cycles": 0,
+            "requests": 39,
+            "stores": 0
+          },
+          "sha256": "a545f8e4e01d8c39b3fd0a2a8b95e14c434ef284e31c53ec16393807734dadee"
+        },
+        {
+          "latency": 2,
+          "file": "search.json",
+          "frames": 179,
+          "stats": {
+            "program": "search",
+            "latency": 2,
+            "retired": 33,
+            "cycles": 179,
+            "cpi": 5.424242424242424,
+            "wait_cycles": 39,
+            "requests": 39,
+            "stores": 0
+          },
+          "sha256": "7069878df7fa1957736272982f4435e1d820e08981e79302b3314be04ba52770"
+        },
+        {
+          "latency": 4,
+          "file": "search-l4.json",
+          "frames": 257,
+          "stats": {
+            "program": "search",
+            "latency": 4,
+            "retired": 33,
+            "cycles": 257,
+            "cpi": 7.787878787878788,
+            "wait_cycles": 117,
+            "requests": 39,
+            "stores": 0
+          },
+          "sha256": "ef9cbb2e23fe2a64505bcf5d3b9d3db31dbe49747e36f94a8e2ca77394f83d93"
+        }
+      ]
     },
     {
       "id": "sort",
       "file": "sort.json",
       "frames": 703,
-      "sha256": "45b8a3bf3accf3f27c8ceee9a6364c503e78aeec9ccc94b63a78108a4ce2b7a6"
+      "sha256": "45b8a3bf3accf3f27c8ceee9a6364c503e78aeec9ccc94b63a78108a4ce2b7a6",
+      "variants": [
+        {
+          "latency": 1,
+          "file": "sort-l1.json",
+          "frames": 537,
+          "stats": {
+            "program": "sort",
+            "latency": 1,
+            "retired": 123,
+            "cycles": 537,
+            "cpi": 4.365853658536586,
+            "wait_cycles": 0,
+            "requests": 166,
+            "stores": 12
+          },
+          "sha256": "f6ba4c8c3e7b787c252f8623357860cca686b865a957fd92c7fe86eee6b0b99d"
+        },
+        {
+          "latency": 2,
+          "file": "sort.json",
+          "frames": 703,
+          "stats": {
+            "program": "sort",
+            "latency": 2,
+            "retired": 123,
+            "cycles": 703,
+            "cpi": 5.715447154471545,
+            "wait_cycles": 166,
+            "requests": 166,
+            "stores": 12
+          },
+          "sha256": "45b8a3bf3accf3f27c8ceee9a6364c503e78aeec9ccc94b63a78108a4ce2b7a6"
+        },
+        {
+          "latency": 4,
+          "file": "sort-l4.json",
+          "frames": 1035,
+          "stats": {
+            "program": "sort",
+            "latency": 4,
+            "retired": 123,
+            "cycles": 1035,
+            "cpi": 8.414634146341463,
+            "wait_cycles": 498,
+            "requests": 166,
+            "stores": 12
+          },
+          "sha256": "cc03cbb2cea7ebd1d0670138543fb13170dffb7996dbe8a4761f9fee57accb30"
+        }
+      ]
     }
   ]
 }

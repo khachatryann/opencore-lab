@@ -9,3 +9,5 @@ Externally authored ADD test vectors come from the pinned upstream source under 
 All numerical results are generated from actual Verilator runs. The demo is explicitly labeled as playback of those recordings. Browser QA and clean-source rebuild results are recorded in `results/`. After publication, GitHub CI passed and reproduced the committed measurement artifacts. Repository publication and the static demo deployment were also carried out by Codex at the user’s request; evidence is recorded in `results/publication.json`.
 
 Review and understand the design before presenting it as personal engineering work. Future human review, authorship and modifications should be described accurately when they occur.
+
+The follow-up improvement was also authored by Codex: an interactive selector for 18 measured memory-latency traces, verification evidence links, and a reset/restart testbench. These additions do not establish independent human authorship or third-party architectural verification.

@@ -2,14 +2,19 @@
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="See a multi-cycle RISC-V processor work, using verified traces from real RTL simulation."><title>OpenCore Lab — A RISC-V Processor You Can See</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head>
 <body>
-<header><a class="brand" href="#"><span class="logo">O<span>▦</span></span> OpenCore <b>Lab</b></a><div class="header-right"><span class="tag">RV32I / 32 BIT</span><span class="dot"></span><span>TRACE PLAYBACK</span></div></header>
+<header><a class="brand" href="#"><span class="logo">O<span>▦</span></span> OpenCore <b>Lab</b></a><div class="header-right"><a class="source-link" href="https://github.com/khachatryann/opencore-lab">Source &amp; tests ↗</a><span class="tag">RV32I / 32 BIT</span><span class="dot"></span><span>TRACE PLAYBACK</span></div></header>
 <main>
 <section class="intro"><div><p class="eyebrow">HARDWARE, MADE VISIBLE</p><h1>One instruction.<br><span>Every moving part.</span></h1><p class="lede">Step inside a RISC-V processor. Follow real signals from an instruction fetch to the moment a result becomes state.</p></div><div class="intro-note"><span class="note-index">01 — THE OPENCORE EXPERIMENT</span><p>Small enough to understand.<br>Real enough to verify.</p><span>SystemVerilog → Verilator → this view</span></div></section>
 <div id="loading" role="status">Loading verified RTL trace…</div>
 <section class="lab" aria-label="Processor trace player">
-<aside class="programs"><p class="eyebrow">CHOOSE AN EXPERIMENT</p><nav id="programs" aria-label="Demonstration programs"></nav><div class="source-note"><span class="dot"></span><b>Actual RTL simulation</b><p>Recorded signal values, replayed in your browser. No hardware runs in this page.</p><span class="tag">2-CYCLE MEMORY</span></div></aside>
-<div class="workspace">
+<aside class="programs"><p class="eyebrow">CHOOSE AN EXPERIMENT</p><nav id="programs" aria-label="Demonstration programs"></nav><div class="source-note"><span class="dot"></span><b>Actual RTL simulation</b><p>Recorded signal values, replayed in your browser. No hardware runs in this page.</p><span class="tag" id="memory-tag">2-CYCLE MEMORY</span></div></aside>
+<div class="workspace" id="workspace" aria-busy="true">
 <div class="workspace-top"><div><span class="eyebrow" id="program-kicker">01 / SEQUENCE</span><h2 id="program-title">Fibonacci</h2><p id="program-desc">Build a sequence, one addition at a time.</p></div><div class="counter"><span id="cycle">001</span><small>CYCLE / <span id="total">000</span></small></div></div>
+<section class="latency-experiment" aria-label="Memory latency experiment">
+<div class="latency-heading"><label for="latency">Memory response time</label><select id="latency"><option value="1">1 cycle</option><option value="2" selected>2 cycles</option><option value="4">4 cycles</option></select><span>Compare recorded RTL runs</span></div>
+<dl class="metrics"><div><dt>Total cycles</dt><dd id="metric-cycles">—</dd></div><div><dt>Retired instructions</dt><dd id="metric-retired">—</dd></div><div><dt>Waiting cycles</dt><dd id="metric-waits">—</dd></div><div><dt>Cycles / instruction</dt><dd id="metric-cpi">—</dd></div></dl>
+<p id="latency-explanation" role="status"></p>
+</section>
 <div class="controls"><button id="reset" title="Reset playback">↺ <span>Reset</span></button><button class="primary" id="play">▶ Play</button><button id="step">Cycle →</button><button id="instruction">Instruction ⇥</button><label class="speed">Speed <select id="speed" aria-label="Playback speed"><option value="1000">1 cycle/s</option><option value="250" selected>4 cycles/s</option><option value="83">12 cycles/s</option><option value="25">40 cycles/s</option></select></label></div>
 <div class="scrubber"><input type="range" id="timeline" min="0" max="1" value="0" aria-label="Cycle timeline"><span id="progress">Cycle 1</span></div>
 <div class="instruction"><div><span class="eyebrow">PC / INSTRUCTION</span><div><code id="pc">0x00000000</code><strong id="asm">—</strong></div></div><span class="tag" id="word">—</span></div>
@@ -32,5 +37,6 @@
 <details><summary>Read the assembly <span>↗</span></summary><pre id="source"></pre></details>
 </div></section>
 <section class="experiment"><div><p class="eyebrow">02 / MEASURE, THEN EXPLAIN</p><h2>What does waiting cost?</h2><p>The same six programs, the same processor, three memory response times. These bars come directly from measured RTL cycles.</p><div class="experiment-note"><b>No clock speed assumptions.</b> CPI includes the terminal EBREAK fetch and trap cycles; EBREAK does not retire. Waiting means a cycle with a valid request and no response.</div></div><div class="chart"><img src="latency.svg" alt="Grouped bar chart of measured cycles per instruction for six programs at memory latencies of one, two, and four cycles."><a href="benchmark.json">Download measured results ↗</a></div></section>
+<nav class="evidence-links" aria-label="Project evidence"><a href="https://github.com/khachatryann/opencore-lab">Source code ↗</a><a href="https://github.com/khachatryann/opencore-lab/actions/workflows/verification.yml">Verification runs ↗</a><a href="https://github.com/khachatryann/opencore-lab/blob/main/docs/technical-report.md">Technical report ↗</a><a href="https://github.com/khachatryann/opencore-lab/blob/main/docs/ai-assistance.md">AI assistance ↗</a></nav>
 <footer><span>OPENCORE LAB <b>/</b> A RISC-V Processor You Can See</span><p>Educational RTL. In-house differential verification and adapted upstream ADD vectors. No claim of architectural certification or FPGA deployment.</p></footer>
 </main></body></html>
