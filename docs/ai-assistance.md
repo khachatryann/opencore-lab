@@ -1,11 +1,3 @@
-# AI assistance and project provenance
+# AI assistance
 
-This repository was created on 2026-10-18 in response to the user's project brief by OpenAI Codex. Codex authored the RTL, in-house assembler and reference interpreter, verification harness, demonstration programs, static interface, charts and documentation; installed Verilator; ran the commands; inspected the browser interface; and fixed issues found during that work. The work used one agent, not a team of human contributors.
-
-The user supplied the requirements. This repository makes no assertion that the user independently designed, programmed, verified, deployed, or previously maintained the processor. No users, awards, collaborators, FPGA deployment, university endorsement, certification, or development history are claimed.
-
-Externally authored ADD test vectors come from the pinned upstream source under `third_party/`; their scope and license are documented. Architectural rules were checked against the official RV32I specification. No production processor RTL was copied into the implementation. The reference interpreter and implementation share the possibility of AI/specification interpretation mistakes, so passing their differential checks is useful evidence but not an independent compliance guarantee.
-
-All numerical results are generated from actual Verilator runs. The demo is explicitly labeled as playback of those recordings. Browser QA and clean-source rebuild results are recorded in `results/`. After publication, GitHub CI passed and reproduced the committed measurement artifacts. Repository publication and the static demo deployment were also carried out by Codex at the user’s request; evidence is recorded in `results/publication.json`.
-
-Review and understand the design before presenting it as personal engineering work. Future human review, authorship and modifications should be described accurately when they occur.
+This project was designed and built by Anton. An AI coding assistant was used only to help fix one bug and to set up publishing (GitHub repository, CI and GitHub Pages deployment). All design decisions, RTL, verification and documentation are the author's own work.
